@@ -5,8 +5,8 @@ WORKDIR /app
 # Copiar requirements
 COPY requirements.txt .
 
-# Instalar dependencias
-RUN pip install --no-cache-dir -r requirements.txt
+# Instalar dependencias con timeout más largo
+RUN pip install --no-cache-dir --default-timeout=1000 -r requirements.txt
 
 # Copiar código
 COPY . .
