@@ -1,0 +1,513 @@
+═══════════════════════════════════════════════════════════════
+   GUIÓN DETALLADO PARA VIDEO DE DEMOSTRACIÓN - META APP REVIEW
+═══════════════════════════════════════════════════════════════
+
+TÍTULO: CRM Político Multi-Tenant - Demo para Meta App Review
+DURACIÓN: 3-4 minutos
+IDIOMA: Español (puedes hacer versión en inglés también)
+FORMATO: 1920x1080 (Full HD), 30 fps, MP4
+
+═══════════════════════════════════════════════════════════════
+SECCIÓN 1: INTRODUCCIÓN (00:00-00:15) - 15 segundos
+═══════════════════════════════════════════════════════════════
+
+[PANTALLA]
+- Logo de la app centrado
+- Texto: "CRM Político Multi-Tenant"
+- Subtítulo: "Gestión Unificada de Conversaciones Políticas"
+
+[NARRACIÓN]
+"Hola, soy [Tu Nombre], desarrollador de CRM Político Multi-Tenant. 
+Esta aplicación ayuda a candidatos políticos a gestionar conversaciones 
+de Facebook Messenger, Instagram Direct y WhatsApp Business en una sola 
+plataforma, con análisis de inteligencia artificial. A continuación 
+mostraré cómo funciona."
+
+[TIPS]
+- Habla despacio y claro
+- Sonríe (se nota en la voz)
+- Usa un tono profesional pero amigable
+
+═══════════════════════════════════════════════════════════════
+SECCIÓN 2: LOGIN Y OAUTH (00:15-00:45) - 30 segundos
+═══════════════════════════════════════════════════════════════
+
+[PANTALLA - Acción 1: Dashboard inicial]
+- Mostrar dashboard vacío o con botón destacado
+- Cursor apuntando al botón "Conectar Facebook/Instagram"
+
+[NARRACIÓN]
+"Para comenzar, el candidato hace clic en 'Conectar Facebook e Instagram'. 
+Esto inicia el flujo de autenticación OAuth de Meta."
+
+[ACCIÓN EN PANTALLA]
+→ Click en botón "Conectar Facebook/Instagram"
+→ PAUSA de 1 segundo para que se vea claro
+
+---
+
+[PANTALLA - Acción 2: Ventana OAuth de Facebook]
+- Ventana de Facebook OAuth con permisos listados
+- Cursor sin moverse (dejar que se lea)
+
+[NARRACIÓN]
+"Nuestra app solicita permisos para acceder a las páginas que el usuario 
+administra, así como para leer mensajes de Facebook Messenger e Instagram 
+Direct. El usuario revisa los permisos y autoriza."
+
+[ACCIÓN EN PANTALLA]
+→ Mostrar ventana OAuth por 3-4 segundos (tiempo para leer)
+→ Scroll suave si hay muchos permisos
+→ Click en botón "Continuar como [Nombre]" o "Autorizar"
+→ PAUSA de 1 segundo
+
+[TIPS]
+- Asegúrate de que los permisos sean visibles y legibles
+- NO ocultes ningún permiso
+- Muestra la pantalla completa de Facebook, no recortes
+
+---
+
+[PANTALLA - Acción 3: Modal de Selección de Páginas]
+- Modal con título "Seleccionar Páginas a Conectar"
+- Lista con checkboxes de 2-3 páginas
+- Cada página muestra: "📘 [Nombre Página] + 📷 @instagram_user"
+
+[NARRACIÓN]
+"Después de autorizar, si el usuario administra múltiples páginas de Facebook, 
+aparece un modal para seleccionar cuáles conectar. Esto es útil si un equipo 
+político gestiona varias campañas."
+
+[ACCIÓN EN PANTALLA]
+→ Mostrar modal por 2 segundos
+→ Cursor apunta a los checkboxes
+→ Click para deseleccionar una página (mostrar interacción)
+→ Click para volver a seleccionarla (opcional)
+→ Click en botón "Conectar Seleccionadas"
+→ PAUSA de 1 segundo
+
+---
+
+[PANTALLA - Acción 4: Mensaje de Confirmación]
+- Alert o notificación de éxito
+- Texto: "2 página(s) nueva(s) conectada(s)"
+
+[NARRACIÓN]
+"El sistema confirma las páginas conectadas y las agrega al CRM."
+
+[ACCIÓN EN PANTALLA]
+→ Mostrar mensaje de éxito por 2 segundos
+→ Cerrar mensaje (click en X o auto-cierra)
+
+═══════════════════════════════════════════════════════════════
+SECCIÓN 3: DASHBOARD DE CANDIDATOS (00:45-01:20) - 35 segundos
+═══════════════════════════════════════════════════════════════
+
+[PANTALLA]
+- Dashboard con 2-3 tarjetas de candidatos
+- Cada tarjeta muestra:
+  • Nombre de página de Facebook
+  • "📷 Instagram: @username"
+  • "📱 WhatsApp: +1234567890" (o "No configurado")
+  • Botones: "Sincronizar" y "Config"
+
+[NARRACIÓN]
+"Aquí está el dashboard principal. Cada tarjeta representa una página de 
+Facebook conectada. El sistema es multi-tenant: cada candidato solo ve 
+y gestiona sus propias páginas, garantizando privacidad total entre 
+diferentes campañas políticas."
+
+[ACCIÓN EN PANTALLA]
+→ Mostrar dashboard estático por 2 segundos
+→ Cursor apunta a nombre de la primera página
+→ PAUSA de 1 segundo
+→ Cursor señala "Instagram: @username"
+→ PAUSA de 1 segundo
+→ Cursor señala "WhatsApp: +1234567890"
+
+[NARRACIÓN (continuación)]
+"Vemos que esta página tiene Instagram Business conectado y WhatsApp 
+configurado. Ahora sincronizaremos las conversaciones."
+
+[ACCIÓN EN PANTALLA]
+→ Cursor se mueve al botón "Sincronizar" de la primera tarjeta
+→ PAUSA de 1 segundo (preparación para siguiente sección)
+
+═══════════════════════════════════════════════════════════════
+SECCIÓN 4: SINCRONIZACIÓN DE MENSAJES (01:20-02:20) - 60 segundos
+═══════════════════════════════════════════════════════════════
+
+[PANTALLA - Acción 1: Iniciar sincronización]
+- Cursor sobre botón "Sincronizar"
+
+[NARRACIÓN]
+"Al hacer clic en 'Sincronizar', la aplicación se conecta a la Graph API 
+de Meta para importar las conversaciones recientes de Facebook Messenger 
+e Instagram Direct."
+
+[ACCIÓN EN PANTALLA]
+→ Click en botón "Sincronizar"
+→ Botón cambia a estado de carga (spinner o texto "Sincronizando...")
+→ PAUSA de 3-4 segundos (puedes acelerar el video 2x aquí si quieres)
+
+---
+
+[PANTALLA - Acción 2: Mensaje de éxito]
+- Notificación: "15 conversaciones de Facebook y 8 de Instagram sincronizadas"
+
+[NARRACIÓN]
+"La sincronización se completó. Importamos 15 conversaciones de Facebook 
+Messenger y 8 de Instagram Direct."
+
+[ACCIÓN EN PANTALLA]
+→ Mostrar mensaje por 2 segundos
+→ Cerrar mensaje
+
+---
+
+[PANTALLA - Acción 3: Navegar a pestaña "Personas"]
+- Click en navegación superior o sidebar para ir a "Personas"
+
+[NARRACIÓN]
+"Ahora veamos las conversaciones importadas."
+
+[ACCIÓN EN PANTALLA]
+→ Click en pestaña/botón "Personas"
+→ PAUSA de 1 segundo (transición)
+
+---
+
+[PANTALLA - Acción 4: Tabla de Personas/Conversaciones]
+- Tabla con columnas: Nombre, Canal, Última Interacción, Sentimiento
+- Filas con datos:
+  • "Juan Pérez" | 📘 Facebook | "2 horas" | 😊 Positivo
+  • "María García" | 📷 Instagram | "1 día" | 😐 Neutral
+  • "Carlos López" | 📘 Facebook | "3 días" | 😠 Negativo
+
+[NARRACIÓN]
+"Aquí están todas las conversaciones centralizadas. Vemos el nombre del 
+ciudadano, el canal (Facebook o Instagram), cuándo fue la última interacción, 
+y el sentimiento detectado automáticamente por nuestra IA."
+
+[ACCIÓN EN PANTALLA]
+→ Mostrar tabla por 3 segundos
+→ Cursor apunta a columna "Canal" (iconos de Facebook e Instagram)
+→ PAUSA de 1 segundo
+→ Cursor apunta a columna "Sentimiento" (emojis de sentimientos)
+→ PAUSA de 1 segundo
+
+[NARRACIÓN (continuación)]
+"Observen cómo diferenciamos claramente entre mensajes de Facebook e Instagram. 
+Ahora veamos el detalle de una conversación."
+
+[ACCIÓN EN PANTALLA]
+→ Scroll suave por la tabla (opcional, si hay muchas filas)
+→ Click en una fila (ej: "Juan Pérez")
+
+═══════════════════════════════════════════════════════════════
+SECCIÓN 5: DETALLE DE CONVERSACIÓN Y ANÁLISIS IA (02:20-03:20) - 60 seg
+═══════════════════════════════════════════════════════════════
+
+[PANTALLA - Vista de conversación individual]
+- Panel izquierdo: Lista de mensajes (historial de chat)
+  • "Hola, tengo una pregunta sobre educación..."
+  • "También me preocupa la economía local"
+  • "¿Cuál es tu propuesta para mejorar las escuelas?"
+  
+- Panel derecho: Análisis automático
+  • **Sentimiento:** 😊 Positivo (85%)
+  • **Intereses:** Educación, Economía Local, Infraestructura
+  • **Demografía:** 
+    - Edad: 35 años
+    - Ocupación: Profesor
+    - Ubicación: Distrito Centro
+  • **Última Interacción:** hace 2 horas
+  • **Canal:** 📘 Facebook Messenger
+
+[NARRACIÓN]
+"Esta es la vista detallada de una conversación específica. En el lado 
+izquierdo vemos el historial completo de mensajes. En el lado derecho, 
+el análisis automático generado por Google Gemini."
+
+[ACCIÓN EN PANTALLA]
+→ Mostrar pantalla estática por 2 segundos
+→ Cursor señala panel de mensajes (izquierda)
+→ PAUSA de 1 segundo
+
+[NARRACIÓN (continuación)]
+"El sistema analiza cada mensaje para detectar:
+Primero, el sentimiento general del ciudadano..."
+
+[ACCIÓN EN PANTALLA]
+→ Cursor apunta a "Sentimiento: Positivo"
+→ PAUSA de 1 segundo
+
+[NARRACIÓN (continuación)]
+"...los temas que le interesan..."
+
+[ACCIÓN EN PANTALLA]
+→ Cursor apunta a lista de "Intereses: Educación, Economía Local"
+→ PAUSA de 1 segundo
+
+[NARRACIÓN (continuación)]
+"...y datos demográficos como edad, ocupación y ubicación."
+
+[ACCIÓN EN PANTALLA]
+→ Cursor apunta a sección "Demografía"
+→ PAUSA de 1 segundo
+
+[NARRACIÓN (continuación)]
+"Esta información ayuda a las campañas políticas a entender mejor las 
+necesidades de los ciudadanos y responder de forma más efectiva. Toda 
+la información está protegida según nuestra política de privacidad y 
+cumple con las regulaciones de protección de datos."
+
+[ACCIÓN EN PANTALLA]
+→ Scroll suave por los mensajes para mostrar más contenido
+→ PAUSA de 2 segundos
+→ Click en "Volver" o botón de navegación para regresar a la tabla
+
+═══════════════════════════════════════════════════════════════
+SECCIÓN 6: CONFIGURACIÓN DE WHATSAPP (03:20-03:50) - 30 segundos
+═══════════════════════════════════════════════════════════════
+
+[PANTALLA - Volver al Dashboard de Candidatos]
+- Mostrar tarjetas de candidatos nuevamente
+
+[NARRACIÓN]
+"Además de Facebook e Instagram, los candidatos pueden conectar WhatsApp 
+Business para centralizar toda su comunicación digital."
+
+[ACCIÓN EN PANTALLA]
+→ Mostrar dashboard por 1 segundo
+→ Cursor se mueve al botón "Config" (configuración de WhatsApp)
+→ Click en "Config"
+
+---
+
+[PANTALLA - Modal de Configuración de WhatsApp]
+- Formulario con campos:
+  • Phone Number ID: [campo con valor]
+  • Business Account ID: [campo con valor]
+  • Número de teléfono: [campo con valor]
+- Botones: "Cancelar" y "Guardar"
+
+[NARRACIÓN]
+"Aquí el candidato ingresa sus credenciales de WhatsApp Business API, 
+obtenidas desde Meta Business Manager."
+
+[ACCIÓN EN PANTALLA]
+→ Mostrar modal por 2 segundos
+→ Cursor apunta a cada campo brevemente (no escribir, ya debe tener datos)
+→ Click en botón "Guardar"
+→ PAUSA de 1 segundo
+
+---
+
+[PANTALLA - Confirmación]
+- Modal se cierra
+- Tarjeta de candidato ahora muestra: "📱 WhatsApp: +1234567890"
+
+[NARRACIÓN]
+"El número de WhatsApp ahora está configurado y visible en la tarjeta 
+del candidato."
+
+[ACCIÓN EN PANTALLA]
+→ Cursor señala el número de WhatsApp en la tarjeta
+→ PAUSA de 1 segundo
+
+═══════════════════════════════════════════════════════════════
+SECCIÓN 7: CIERRE (03:50-04:15) - 25 segundos
+═══════════════════════════════════════════════════════════════
+
+[PANTALLA - Opcional: Dashboard de Estadísticas]
+- Si tienes sección de estadísticas, mostrar brevemente:
+  • Total de conversaciones: 156
+  • Sentimientos: 45% Positivo, 35% Neutral, 20% Negativo
+  • Top 5 Intereses: Educación, Salud, Economía, Empleo, Seguridad
+  • Conversaciones por canal: 
+    - Facebook: 89
+    - Instagram: 52
+    - WhatsApp: 15
+
+[NARRACIÓN]
+"El dashboard también muestra métricas en tiempo real: total de conversaciones, 
+distribución de sentimientos, y los temas más mencionados por los ciudadanos. 
+Todo organizado por candidato."
+
+[ACCIÓN EN PANTALLA]
+→ Mostrar dashboard de estadísticas por 3 segundos
+→ Cursor señala gráficas (opcional)
+
+[SI NO TIENES ESTADÍSTICAS, SALTA AL CIERRE FINAL]
+
+---
+
+[PANTALLA - Pantalla final]
+- Fondo sólido (azul oscuro o blanco)
+- Logo de la app centrado
+- Texto:
+  ─────────────────────────
+   CRM POLÍTICO MULTI-TENANT
+   
+   ✅ Gestión unificada de conversaciones
+   ✅ Facebook, Instagram, WhatsApp
+   ✅ Análisis con IA (Google Gemini)
+   ✅ Multi-tenant seguro
+   
+   Contacto: soporte@tu-dominio.com
+  ─────────────────────────
+
+[NARRACIÓN]
+"En resumen, CRM Político Multi-Tenant permite a candidatos y equipos de 
+campaña gestionar conversaciones de Facebook Messenger, Instagram Direct 
+y WhatsApp Business, con análisis de inteligencia artificial, todo en una 
+plataforma segura y multi-tenant. Gracias por su atención."
+
+[ACCIÓN EN PANTALLA]
+→ Mostrar pantalla final por 5-7 segundos
+→ Fade out
+
+═══════════════════════════════════════════════════════════════
+NOTAS TÉCNICAS PARA LA GRABACIÓN
+═══════════════════════════════════════════════════════════════
+
+✅ PREPARACIÓN ANTES DE GRABAR
+
+1. Ejecutar `generate_dummy_data.py` para crear:
+   - 2-3 candidatos
+   - 15-20 conversaciones con datos realistas
+   - Nombres ficticios (Juan Pérez, María García, etc.)
+   - Mensajes políticos realistas pero genéricos
+
+2. Limpiar tu pantalla:
+   - Cerrar todas las pestañas del navegador excepto la app
+   - Desactivar notificaciones de Windows
+   - Ocultar barra de tareas (modo presentación)
+   - Cerrar apps innecesarias
+
+3. Configurar grabación:
+   - Resolución: 1920x1080 (Full HD)
+   - Frame rate: 30 fps
+   - Audio: Micrófono de buena calidad, sin eco
+   - Formato: MP4 (H.264 codec)
+
+4. Practicar:
+   - Lee el guión 2-3 veces antes de grabar
+   - Practica el flujo de clics sin grabar
+   - Asegúrate de que todo funciona (no crashes)
+
+═══════════════════════════════════════════════════════════════
+
+⚠️ ERRORES A EVITAR
+
+❌ NO HACER:
+- No muestres datos reales de personas
+- No muestres tokens o credenciales en pantalla
+- No uses cursor muy pequeño (aumenta tamaño en Windows)
+- No hables demasiado rápido
+- No grabes con luz de fondo (tu cara oscura)
+- No uses música de fondo con copyright
+- No cortes partes importantes (OAuth, sincronización)
+- No grabes con ventanas superpuestas o notificaciones
+
+✅ SÍ HACER:
+- Usa datos dummy realistas
+- Habla despacio y claro
+- Pausa 1-2 segundos después de cada acción importante
+- Muestra cada pantalla completa (no recortes)
+- Graba en un ambiente silencioso
+- Prueba el audio antes de grabar todo
+- Usa cursor grande o resaltado (OBS tiene plugins)
+
+═══════════════════════════════════════════════════════════════
+
+🎬 HERRAMIENTAS RECOMENDADAS
+
+GRABACIÓN DE PANTALLA:
+• OBS Studio (gratuito, profesional)
+  https://obsproject.com/
+  → Mejor para control total
+
+• Loom (freemium, súper fácil)
+  https://www.loom.com/
+  → Mejor para principiantes
+
+• ScreenFlow (Mac, de pago)
+  → Mejor para edición avanzada
+
+EDICIÓN DE VIDEO:
+• DaVinci Resolve (gratuito)
+• Shotcut (gratuito, open source)
+• Camtasia (de pago, fácil de usar)
+
+CURSOR DESTACADO:
+• PointerFocus (Windows)
+• Mousepose (Mac)
+• OBS Plugin: "Cursor Highlight"
+
+TEXTO EN PANTALLA (opcional):
+• Durante la edición, puedes agregar:
+  - Título de secciones ("OAuth Flow", "Sincronización", etc.)
+  - Anotaciones con flechas para destacar elementos
+  - Subtítulos si tu audio no es perfecto
+
+═══════════════════════════════════════════════════════════════
+
+📤 EXPORTAR Y SUBIR
+
+CONFIGURACIÓN DE EXPORTACIÓN:
+- Formato: MP4
+- Codec: H.264
+- Resolución: 1920x1080
+- Bitrate: 5-8 Mbps
+- Audio: AAC, 128-192 kbps
+- Tamaño máximo: 100 MB (Meta acepta hasta 200 MB)
+
+DÓNDE SUBIR:
+1. Directamente a Meta App Review (recomendado)
+   → Sube el archivo MP4 durante el proceso de review
+
+2. YouTube (unlisted/privado) + poner link en Meta
+   → Útil si el archivo es muy grande
+
+3. Vimeo (privado) + poner link en Meta
+   → Buena calidad, sin ads
+
+═══════════════════════════════════════════════════════════════
+
+✅ CHECKLIST FINAL ANTES DE ENVIAR
+
+Antes de subir el video a Meta, verifica:
+
+□ Video dura entre 3-5 minutos (NO más largo)
+□ Muestra CLARAMENTE cada permiso siendo usado:
+  □ business_management (selección de páginas)
+  □ pages_show_list (listar páginas en modal)
+  □ pages_messaging (mensajes de Facebook Messenger)
+  □ pages_read_engagement (lectura de conversaciones)
+  □ instagram_basic (info de cuenta de Instagram)
+  □ instagram_manage_messages (mensajes de Instagram Direct)
+□ Audio es claro y sin ruido de fondo
+□ No hay datos reales de personas
+□ No hay tokens o credenciales visibles
+□ Cursor es visible en todo momento
+□ Cada acción importante tiene pausa de 1-2 seg
+□ Formato es MP4, 1920x1080, 30fps
+□ Tamaño es menor a 100 MB
+
+═══════════════════════════════════════════════════════════════
+
+🎉 ¡LISTO PARA GRABAR!
+
+Con este guión, tienes un video profesional que:
+✅ Demuestra claramente cada permiso solicitado
+✅ Explica el propósito de tu app (CRM político)
+✅ Muestra flujo completo de usuario
+✅ Cumple con requisitos de Meta App Review
+
+Tiempo estimado de grabación: 1-2 horas (incluyendo práctica)
+Tiempo de edición: 30 minutos - 1 hora
+
+¡Mucha suerte con tu App Review! 🚀
+

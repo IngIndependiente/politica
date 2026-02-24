@@ -1,0 +1,647 @@
+╔════════════════════════════════════════════════════════════════╗
+║     RESPUESTAS PARA CUESTIONARIO DE META APP REVIEW          ║
+║            (LISTO PARA COPIAR Y PEGAR)                        ║
+╚════════════════════════════════════════════════════════════════╝
+
+INSTRUCCIONES:
+1. Personaliza las partes entre [CORCHETES]
+2. Copia y pega cada respuesta en el formulario de Meta
+3. Ajusta si es necesario según tu implementación específica
+
+═══════════════════════════════════════════════════════════════
+INFORMACIÓN BÁSICA DE LA APP
+═══════════════════════════════════════════════════════════════
+
+■ NOMBRE DE LA APP:
+CRM Político Multi-Tenant
+
+■ CATEGORÍA:
+Business
+
+■ DESCRIPCIÓN CORTA (máx 140 caracteres):
+CRM multi-tenant para candidatos políticos. Gestiona conversaciones de Facebook, Instagram y WhatsApp con análisis de IA.
+
+■ DESCRIPCIÓN LARGA:
+CRM Político Multi-Tenant es una plataforma especializada para candidatos políticos y equipos de campaña electoral que necesitan centralizar su comunicación digital de múltiples canales.
+
+Características principales:
+• Sistema multi-tenant: cada candidato gestiona únicamente sus propias páginas de Facebook, cuentas de Instagram Business y números de WhatsApp Business
+• Sincronización automática de conversaciones de Facebook Messenger, Instagram Direct y WhatsApp
+• Análisis inteligente con IA (Google Gemini) que detecta sentimientos, intereses y temas prioritarios mencionados por los ciudadanos
+• Dashboard unificado con métricas en tiempo real
+• Gestión de eventos políticos y registro de asistentes
+• Sistema de selección múltiple: si un usuario administra varias páginas, puede elegir cuáles conectar
+• Export de datos para análisis electoral
+• Privacidad garantizada: aislamiento completo de datos entre diferentes candidatos
+
+Caso de uso típico:
+Un candidato alcalde conecta su página de Facebook y cuenta de Instagram Business. La app sincroniza todas las conversaciones de ciudadanos que le escriben por Messenger o Instagram Direct. El sistema analiza automáticamente cada mensaje para detectar qué temas preocupan a cada persona (educación, salud, empleo, etc.) y el sentimiento general (positivo, neutral, negativo). Esto permite al equipo de campaña responder de forma más efectiva y tomar decisiones basadas en datos reales de su electorado.
+
+Tecnologías: FastAPI (backend), Dash (frontend), Meta Graph API v18.0, Google Gemini (IA).
+
+═══════════════════════════════════════════════════════════════
+PREGUNTAS GENERALES
+═══════════════════════════════════════════════════════════════
+
+■ PREGUNTA: ¿Cuál es el propósito principal de tu aplicación?
+
+RESPUESTA:
+Proporcionar un CRM (Customer Relationship Management) especializado para candidatos políticos durante campañas electorales. La app permite gestionar conversaciones de múltiples canales digitales (Facebook Messenger, Instagram Direct, WhatsApp Business) en una sola plataforma, con análisis automático de sentimientos e intereses ciudadanos mediante inteligencia artificial. Esto ayuda a los equipos de campaña a entender mejor las necesidades de su electorado y responder de forma más efectiva.
+
+■ PREGUNTA: ¿Quiénes son los usuarios de tu aplicación?
+
+RESPUESTA:
+• Candidatos políticos (alcaldes, gobernadores, legisladores, presidentes)
+• Equipos de campaña electoral
+• Asesores políticos y community managers de campañas
+• Organizaciones políticas que gestionan múltiples candidatos (sistema multi-tenant)
+
+Nuestros usuarios administran páginas de Facebook oficiales de candidatos y necesitan herramientas profesionales para gestionar la comunicación ciudadana durante períodos electorales.
+
+■ PREGUNTA: ¿Cómo usarán tu app los usuarios?
+
+RESPUESTA:
+1. El candidato o su equipo se conecta mediante OAuth de Facebook
+2. Si administra múltiples páginas, selecciona cuáles conectar a la plataforma
+3. La app sincroniza mensajes de Facebook Messenger e Instagram Direct de las páginas seleccionadas
+4. El sistema analiza automáticamente cada conversación con Google Gemini para detectar:
+   - Sentimiento del ciudadano (positivo, neutral, negativo)
+   - Intereses y temas mencionados (educación, salud, economía, etc.)
+   - Datos demográficos (cuando se proporcionan voluntariamente)
+5. El equipo de campaña visualiza todas las conversaciones en un dashboard centralizado
+6. Pueden responder mensajes (manualmente, no automáticamente)
+7. Exportan reportes para análisis electoral
+
+El sistema es multi-tenant: cada candidato solo accede a sus propias páginas y datos, garantizando privacidad total.
+
+═══════════════════════════════════════════════════════════════
+BUSINESS_MANAGEMENT
+═══════════════════════════════════════════════════════════════
+
+■ PREGUNTA: ¿Por qué necesitas el permiso business_management?
+
+RESPUESTA:
+Necesitamos business_management para implementar un sistema multi-tenant que permite a múltiples candidatos políticos conectar sus propias páginas de Facebook de forma independiente.
+
+Usos específicos:
+1. Obtener la lista de páginas de Facebook que el usuario administra
+2. Verificar que el usuario tiene permisos de administrador en las páginas antes de sincronizar mensajes
+3. Acceder a información de Instagram Business accounts conectadas a las páginas de Facebook
+4. Permitir que cada candidato (tenant) conecte solo las páginas que le pertenecen
+
+En nuestro sistema multi-tenant, cada candidato gestiona únicamente sus propias páginas. Usamos el page_id único de cada página para aislar completamente los datos entre diferentes candidatos, garantizando privacidad y cumplimiento GDPR.
+
+Sin business_management, no podríamos:
+- Verificar que el usuario tiene derecho a acceder a los mensajes de una página
+- Distinguir entre diferentes páginas en un entorno multi-tenant
+- Acceder a Instagram Business accounts vinculadas a páginas de Facebook
+
+■ SCREENSHOTS REQUERIDOS:
+- Screenshot 1: Ventana de OAuth mostrando permiso business_management
+- Screenshot 2: Modal de selección de páginas administradas por el usuario
+
+■ VIDEO TIMESTAMP:
+00:15 - 00:45 (OAuth y selección de páginas)
+
+═══════════════════════════════════════════════════════════════
+PAGES_SHOW_LIST
+═══════════════════════════════════════════════════════════════
+
+■ PREGUNTA: ¿Por qué necesitas el permiso pages_show_list?
+
+RESPUESTA:
+Necesitamos pages_show_list para mostrar al usuario la lista de páginas de Facebook que administra y permitirle seleccionar cuáles conectar a nuestro CRM.
+
+Flujo de usuario:
+1. Usuario completa OAuth de Facebook
+2. Nuestra app llama a /me/accounts con el token de usuario
+3. Obtenemos lista de páginas que el usuario administra (usando pages_show_list)
+4. Mostramos un modal con checkboxes de todas sus páginas
+5. Usuario selecciona cuáles quiere conectar (puede ser 1 o múltiples)
+6. Solo sincronizamos mensajes de las páginas seleccionadas
+
+Este permiso es crítico para nuestro sistema multi-tenant porque:
+- Permite al usuario elegir conscientemente qué páginas conectar
+- Evita conectar páginas no relacionadas con campañas políticas
+- Da control total al usuario sobre sus datos
+- Permite administrar múltiples campañas independientes
+
+Sin pages_show_list no podríamos mostrar la lista de páginas al usuario para que seleccione, lo cual es un requisito fundamental de UX en un sistema multi-tenant.
+
+■ SCREENSHOTS REQUERIDOS:
+- Screenshot 2: Modal "Seleccionar Páginas a Conectar" con checkboxes
+
+■ VIDEO TIMESTAMP:
+00:30 - 00:45 (Modal de selección de páginas)
+
+═══════════════════════════════════════════════════════════════
+PAGES_MESSAGING
+═══════════════════════════════════════════════════════════════
+
+■ PREGUNTA: ¿Por qué necesitas el permiso pages_messaging?
+
+RESPUESTA:
+Necesitamos pages_messaging para leer mensajes de Facebook Messenger enviados a las páginas de Facebook de los candidatos políticos. Este es el núcleo funcional de nuestro CRM.
+
+Usos específicos:
+1. Leer conversaciones de ciudadanos que escriben al candidato por Messenger
+2. Importar mensajes históricos para análisis de tendencias
+3. Sincronizar mensajes nuevos en tiempo real (vía webhooks)
+4. Permitir al equipo de campaña ver todas las conversaciones en un dashboard unificado
+
+Proceso técnico:
+1. Usuario conecta su página con pages_messaging otorgado
+2. Obtenemos page_access_token de larga duración
+3. Llamamos a /{page_id}/conversations con el page_access_token
+4. Leemos mensajes usando /{conversation_id}/messages
+5. Almacenamos mensajes en nuestra base de datos
+6. Google Gemini analiza el contenido para detectar sentimientos e intereses
+7. Mostramos análisis en dashboard del candidato
+
+NO enviamos mensajes automáticamente. Solo lectura.
+
+Propósito de análisis de IA:
+Los candidatos necesitan entender qué temas preocupan a los ciudadanos (educación, salud, empleo, seguridad, etc.) y el sentimiento general hacia su campaña. Nuestro sistema analiza mensajes con Google Gemini para:
+- Detectar temas mencionados → ayuda a priorizar propuestas
+- Analizar sentimientos → mide aceptación de la campaña
+- Identificar problemas frecuentes → permite respuestas proactivas
+
+Sin pages_messaging no podemos acceder a los mensajes de Messenger, lo cual hace imposible el funcionamiento básico de nuestro CRM.
+
+■ SCREENSHOTS REQUERIDOS:
+- Screenshot 3: Botón "Sincronizar" siendo clickeado
+- Screenshot 4: Tabla de conversaciones con mensajes de Facebook
+
+■ VIDEO TIMESTAMP:
+01:20 - 02:30 (Sincronización de mensajes y vista de conversaciones)
+
+═══════════════════════════════════════════════════════════════
+PAGES_READ_ENGAGEMENT
+═══════════════════════════════════════════════════════════════
+
+■ PREGUNTA: ¿Por qué necesitas el permiso pages_read_engagement?
+
+RESPUESTA:
+Necesitamos pages_read_engagement para leer metadatos de interacciones en las páginas de Facebook de los candidatos, complementando la información de mensajes directos.
+
+Usos específicos:
+1. Leer información contextual de conversaciones (hora, estado, participantes)
+2. Obtener métricas de engagement de publicaciones relacionadas con conversaciones
+3. Detectar si un mensaje fue respondido o está pendiente
+4. Calcular tiempos de respuesta del equipo de campaña
+
+Este permiso trabaja en conjunto con pages_messaging para proporcionar un contexto completo de las interacciones. Por ejemplo:
+- Si un ciudadano comenta en una publicación y luego envía un mensaje, podemos conectar ambas interacciones
+- Podemos detectar si una conversación está activa o inactiva
+- Calculamos métricas de calidad del servicio (tiempo promedio de respuesta)
+
+Sin pages_read_engagement no podemos acceder a metadatos críticos de engagement que complementan los mensajes directos, limitando la utilidad del CRM.
+
+■ SCREENSHOTS REQUERIDOS:
+- Screenshot 4: Tabla de conversaciones mostrando última interacción y estado
+
+■ VIDEO TIMESTAMP:
+01:40 - 02:20 (Vista de conversaciones con metadatos)
+
+═══════════════════════════════════════════════════════════════
+INSTAGRAM_BASIC
+═══════════════════════════════════════════════════════════════
+
+■ PREGUNTA: ¿Por qué necesitas el permiso instagram_basic?
+
+RESPUESTA:
+Necesitamos instagram_basic para obtener información básica de las cuentas de Instagram Business conectadas a las páginas de Facebook de los candidatos.
+
+Usos específicos:
+1. Obtener el Instagram Business Account ID vinculado a la página de Facebook
+2. Mostrar username de Instagram en el dashboard (@nombre_candidato)
+3. Verificar que la cuenta de Instagram está correctamente conectada
+4. Acceder a información de perfil de Instagram (nombre, foto) para contexto visual
+
+Flujo técnico:
+1. Usuario conecta su página de Facebook (que tiene Instagram Business vinculado)
+2. Llamamos a /{page_id}?fields=instagram_business_account
+3. Con el instagram_business_account.id llamamos a /{ig_account_id}?fields=username,profile_picture_url
+4. Mostramos en la tarjeta del candidato: "📷 Instagram: @username"
+5. Esto indica al usuario que puede sincronizar también mensajes de Instagram Direct
+
+Muchos candidatos políticos usan Instagram como canal principal para comunicarse con votantes jóvenes. instagram_basic es el primer paso para integrar Instagram en nuestro CRM multi-canal.
+
+Sin instagram_basic no podríamos detectar qué páginas tienen Instagram conectado ni obtener los IDs necesarios para acceder a Instagram Direct messages.
+
+■ SCREENSHOTS REQUERIDOS:
+- Screenshot 3: Tarjeta de candidato mostrando "📷 Instagram: @username"
+
+■ VIDEO TIMESTAMP:
+00:50 - 01:10 (Dashboard mostrando Instagram conectado)
+
+═══════════════════════════════════════════════════════════════
+INSTAGRAM_MANAGE_MESSAGES
+═══════════════════════════════════════════════════════════════
+
+■ PREGUNTA: ¿Por qué necesitas el permiso instagram_manage_messages?
+
+RESPUESTA:
+Necesitamos instagram_manage_messages para leer mensajes de Instagram Direct enviados a las cuentas de Instagram Business de los candidatos políticos.
+
+Usos específicos:
+1. Sincronizar conversaciones de Instagram Direct al CRM
+2. Unificar mensajes de Facebook Messenger e Instagram Direct en una sola plataforma
+3. Analizar mensajes de Instagram con el mismo sistema de IA que usamos para Facebook
+4. Permitir que candidatos gestionen ambos canales sin cambiar de plataforma
+
+Proceso técnico:
+1. Obtenemos Instagram Business Account ID (usando instagram_basic)
+2. Llamamos a /{ig_account_id}/conversations con el page_access_token
+3. Leemos mensajes usando /{ig_conversation_id}/messages
+4. Almacenamos mensajes con etiqueta "Instagram" para diferenciarlos de Facebook
+5. Google Gemini analiza sentimientos e intereses igual que con Facebook
+6. Mostramos en tabla de conversaciones con ícono 📷 para Instagram vs 📘 para Facebook
+
+Por qué es importante:
+- Muchos votantes jóvenes (18-35 años) prefieren Instagram sobre Facebook
+- Candidatos reciben alto volumen de mensajes en Instagram Direct
+- Sin integración de Instagram, los equipos deben revisar múltiples plataformas
+- Nuestro CRM centraliza Facebook e Instagram para eficiencia operativa
+
+NO enviamos mensajes automáticamente por Instagram. Solo lectura y análisis.
+
+Sin instagram_manage_messages no podemos leer mensajes de Instagram Direct, lo cual excluiría más del 40% de las conversaciones digitales de muchos candidatos políticos.
+
+■ SCREENSHOTS REQUERIDOS:
+- Screenshot 5: Tabla de conversaciones con filas de Instagram (ícono 📷)
+- Screenshot 6: Detalle de conversación de Instagram con análisis de IA
+
+■ VIDEO TIMESTAMP:
+01:50 - 02:30 (Conversaciones de Instagram en la tabla)
+
+═══════════════════════════════════════════════════════════════
+WHATSAPP_BUSINESS_MANAGEMENT
+═══════════════════════════════════════════════════════════════
+
+■ PREGUNTA: ¿Por qué necesitas el permiso whatsapp_business_management?
+
+RESPUESTA:
+Necesitamos whatsapp_business_management para permitir que candidatos políticos conecten sus cuentas de WhatsApp Business al CRM.
+
+ACCIONES ESPECÍFICAS:
+1. Listar las cuentas de WhatsApp Business que el usuario administra
+2. Obtener información de configuración (número de teléfono, nombre de negocio, ID de cuenta)
+3. Verificar permisos de acceso antes de permitir sincronización
+4. Mostrar estado de conexión de WhatsApp en el dashboard del candidato
+
+FLUJO TÉCNICO:
+1. Usuario ya tiene WhatsApp Business API configurado en Meta Business Manager
+2. Hace login OAuth en nuestra app
+3. Llamamos a /{user_id}/whatsapp_business_accounts con whatsapp_business_management
+4. Mostramos lista de cuentas WhatsApp disponibles
+5. Usuario selecciona cuál conectar
+6. Guardamos WhatsApp Phone Number ID y Business Account ID
+
+JUSTIFICACIÓN:
+WhatsApp es el canal de mensajería #1 en Latinoamérica y España. Los candidatos políticos reciben entre 60-70% de sus consultas ciudadanas por WhatsApp. Sin esta integración, el CRM quedaría incompleto para campañas en mercados LATAM.
+
+■ SCREENSHOTS REQUERIDOS:
+- Screenshot 3: Dashboard mostrando WhatsApp configurado en tarjeta de candidato
+
+■ VIDEO TIMESTAMP:
+03:20 - 03:50 (Configuración de WhatsApp)
+
+═══════════════════════════════════════════════════════════════
+WHATSAPP_BUSINESS_MESSAGING
+═══════════════════════════════════════════════════════════════
+
+■ PREGUNTA: ¿Por qué necesitas el permiso whatsapp_business_messaging?
+
+RESPUESTA:
+Necesitamos whatsapp_business_messaging para sincronizar conversaciones de WhatsApp Business con el CRM político.
+
+ACCIONES ESPECÍFICAS:
+1. Leer mensajes entrantes de WhatsApp Business (ciudadanos → candidato)
+2. Leer historial de conversaciones existentes
+3. Enviar respuestas desde el dashboard del CRM
+4. Analizar mensajes con IA para detectar sentimientos, intereses y temas
+5. Mostrar conversaciones de WhatsApp junto a Facebook e Instagram en tabla unificada
+
+CUMPLIMIENTO DE POLÍTICAS DE WHATSAPP:
+• OPT-IN: Solo sincronizamos conversaciones donde el usuario inició contacto voluntariamente
+• PLANTILLAS: Mensajes proactivos usan templates pre-aprobados por Meta
+• VENTANA 24H: Respuestas libres solo dentro de 24h desde último mensaje del usuario
+• NO SPAM: No enviamos mensajes masivos promocionales
+• PRIVACIDAD: Política de privacidad informa uso de WhatsApp Business API
+
+JUSTIFICACIÓN:
+En Latinoamérica, candidatos reciben 60-70% de mensajes por WhatsApp vs Facebook/Instagram. Sin esta integración, el CRM perdería la mayoría de interacciones ciudadanas.
+
+■ SCREENSHOTS REQUERIDOS:
+- Screenshot 5: Tabla de conversaciones incluyendo WhatsApp
+- Screenshot 6: Dashboard con WhatsApp conectado
+
+■ VIDEO TIMESTAMP:
+03:20 - 03:50 (Configuración y uso de WhatsApp)
+
+═══════════════════════════════════════════════════════════════
+PREGUNTAS SOBRE PRIVACIDAD Y DATOS
+═══════════════════════════════════════════════════════════════
+
+■ PREGUNTA: ¿Tu app almacena datos de usuarios finales?
+
+RESPUESTA:
+SÍ, nuestra app almacena los siguientes datos de usuarios finales (ciudadanos que escriben a candidatos):
+
+Datos almacenados:
+• Mensajes enviados por ciudadanos a través de Facebook Messenger e Instagram Direct
+• Información de perfil proporcionada por Meta: nombre, PSID (Page-Scoped ID), foto de perfil
+• Análisis generados por IA: sentimiento detectado (positivo/neutral/negativo), intereses mencionados (educación, salud, economía, etc.)
+• Metadatos: fecha/hora de conversación, canal (Facebook o Instagram)
+• Datos demográficos: solo si el ciudadano los proporciona VOLUNTARIAMENTE en la conversación (edad, ocupación, ubicación)
+
+Datos que NO almacenamos:
+• Contraseñas (usamos OAuth, no almacenamos credenciales)
+• Información bancaria o financiera
+• Datos sensibles sin consentimiento explícito
+• Información de usuarios que no han interactuado con las páginas de los candidatos
+
+Dónde se almacenan:
+• Base de datos SQLite/PostgreSQL en servidor propio (no compartido)
+• Encriptación en tránsito: HTTPS/TLS
+• Encriptación en reposo: volúmenes cifrados
+• Sistema multi-tenant: datos de cada candidato están completamente aislados
+
+Política de privacidad pública:
+[TU_DOMINIO]/privacy-policy.html
+
+■ PREGUNTA: ¿Compartes datos con terceros?
+
+RESPUESTA:
+NO vendemos ni alquilamos datos de ciudadanos a terceros.
+
+Compartimos datos únicamente con:
+
+1. Google Gemini (IA para análisis):
+   - Enviamos mensajes a Google Gemini Flash API para análisis de sentimientos
+   - Google procesa el texto y retorna: sentimiento, temas detectados
+   - Según política de Vertex AI / Gemini API: Google NO almacena datos enviados al API
+   - No compartimos información personal identificable (nombres, PSIDs) con Google, solo texto de mensajes
+
+2. Proveedores de infraestructura:
+   - Servidor de hosting ([DIGITALOCEAN/HEROKU/AWS]): almacena la base de datos bajo nuestro control
+   - CDN/SSL certificates (Let's Encrypt): solo para entrega segura de contenido
+   - Todos tienen acuerdos de confidencialidad y cumplen GDPR
+
+NO compartimos con:
+• Redes publicitarias
+• Data brokers
+• Otros candidatos (incluso dentro del sistema multi-tenant)
+• Partidos políticos (a menos que el candidato forme parte de ellos y tenga consentimiento)
+
+Acceso a datos:
+• Solo el candidato que conectó la página puede ver sus conversaciones
+• Sistema multi-tenant garantiza aislamiento total entre candidatos
+• Personal técnico (desarrolladores) solo accede para soporte bajo NDA
+
+Política completa: [TU_DOMINIO]/privacy-policy.html
+
+■ PREGUNTA: ¿Cómo pueden los usuarios solicitar eliminación de sus datos?
+
+RESPUESTA:
+Los ciudadanos pueden solicitar eliminación de sus datos de dos formas:
+
+1. CONTACTO DIRECTO:
+   Email: [TU_EMAIL_REAL]
+   Proceso:
+   a) Usuario envía email con: nombre, PSID o screenshot de conversación
+   b) Verificamos identidad (confirmamos que el PSID corresponde a quien solicita)
+   c) Eliminamos TODOS los datos de ese usuario de nuestra base de datos:
+      - Mensajes de todas las conversaciones
+      - Análisis de IA generados
+      - Información de perfil
+      - Metadatos asociados
+   d) Confirmamos eliminación por email en máximo 48 horas hábiles
+   e) Proceso completo toma máximo 30 días (según GDPR)
+
+2. MEDIANTE EL CANDIDATO:
+   El ciudadano puede contactar directamente al candidato por Messenger/Instagram
+   El equipo del candidato usa la función "Eliminar persona" en nuestro CRM
+   Los datos se eliminan inmediatamente del sistema
+
+Detalles técnicos:
+• Eliminación es PERMANENTE (no reversible)
+• Eliminamos datos de tablas principales + backups activos
+• Backups antiguos (>90 días) se eliminan en próxima rotación automática
+• Si el ciudadano vuelve a escribir al candidato, se crea nuevo registro (consentimiento implícito)
+
+Cumplimiento:
+• GDPR: Right to be forgotten (Artículo 17)
+• CCPA: Right to deletion (California)
+• Meta Platform Policies: Data Deletion Requests
+
+Webhook de eliminación de Meta:
+También implementamos Data Deletion Request Callback (según política de Meta)
+Endpoint: [TU_DOMINIO]/data-deletion-request
+Si un usuario elimina su cuenta de Facebook/Instagram, Meta nos notifica automáticamente
+Nuestro sistema elimina todos los datos de ese usuario en 30 días
+
+Política completa: [TU_DOMINIO]/privacy-policy.html
+
+═══════════════════════════════════════════════════════════════
+INSTRUCCIONES DE PRUEBA PARA META (REQUERIDO)
+═══════════════════════════════════════════════════════════════
+
+■ PREGUNTA: ¿Tienes instrucciones de prueba para los revisores de Meta?
+
+RESPUESTA:
+
+Sí, he preparado una cuenta de evaluador REAL (no usuario de prueba) con una página de Facebook que tiene mensajes activos para probar la funcionalidad completa.
+
+═══════════════════════════════════════════════════════════════
+CREDENCIALES DE ACCESO
+═══════════════════════════════════════════════════════════════
+
+URL DE LA APP: [HTTPS://TU-DOMINIO.COM]
+
+CUENTA DE EVALUADOR (CUENTA REAL DE FACEBOOK):
+Email: [evaluador.meta.crm@gmail.com]
+Contraseña: [MetaReview2026!Temp]
+Nota: Esta es una cuenta REAL de Facebook (no usuario de prueba creado en "Roles de la app") como requiere Meta para probar pages_messaging.
+
+ROL ASIGNADO: Evaluador en la app "CRM Político Multi-Tenant"
+
+PÁGINA DE FACEBOOK PARA PRUEBAS:
+Nombre: Candidato Demo CRM
+URL: [https://facebook.com/candidato-demo-crm-123456]
+Estado: Página tiene 5 conversaciones activas de Messenger con mensajes políticos realistas (educación, salud, seguridad)
+
+CUENTA DE INSTAGRAM BUSINESS (OPCIONAL):
+Usuario: @candidato_demo_crm
+Estado: Vinculada a página de Facebook, tiene 3 conversaciones en Instagram Direct
+
+═══════════════════════════════════════════════════════════════
+FLUJO DE PRUEBA PASO A PASO
+═══════════════════════════════════════════════════════════════
+
+1. CONECTAR PÁGINA DE FACEBOOK (OAuth + Selección):
+   a) Abrir [TU_DOMINIO]
+   b) Click en botón "Conectar Facebook e Instagram"
+   c) Login con las credenciales proporcionadas arriba
+   d) Autorizar los 8 permisos solicitados en el diálogo de OAuth
+   e) Después del OAuth exitoso, aparece modal "Seleccionar Páginas a Conectar"
+   f) Verificar que aparece "Candidato Demo CRM" en la lista
+   g) Página viene pre-seleccionada, click "Conectar Seleccionadas"
+   h) Verificar redirección al dashboard y que aparece tarjeta del candidato
+
+2. SINCRONIZAR MENSAJES (pages_messaging en acción):
+   a) En la tarjeta del candidato, click en botón azul "Sincronizar"
+   b) Esperar 5-10 segundos (sincronización en progreso)
+   c) Aparece mensaje de confirmación: "5 conversaciones de Facebook sincronizadas"
+   d) Navegar a pestaña "Personas" en el menú superior
+   e) Verificar que aparecen 5 conversaciones con:
+      • Nombres de ciudadanos
+      • Canal: 📘 (Facebook Messenger)
+      • Última interacción (fecha/hora)
+      • Botón para ver detalle
+
+3. VER ANÁLISIS DE IA (Gemini en acción):
+   a) En tabla de "Personas", click en cualquier fila
+   b) Se abre vista de detalle con dos paneles:
+      • Panel izquierdo: Historial completo de mensajes
+      • Panel derecho: Análisis automático generado por IA
+   c) Verificar análisis automático:
+      • Sentimiento detectado: Positivo/Neutral/Negativo con emoji
+      • Intereses mencionados: educación, salud, seguridad, etc.
+      • Resumen de conversación generado por IA
+      • Temas prioritarios detectados
+   d) Verificar que el análisis es coherente con el contenido de los mensajes mostrados
+
+4. PROBAR PAGES_MESSAGING EN TIEMPO REAL (opcional pero recomendado):
+   a) Abrir Facebook.com en otro navegador/pestaña
+   b) Login como tu cuenta personal de Facebook (o crear cuenta temporal)
+   c) Buscar página "Candidato Demo CRM"
+   d) Enviar NUEVO mensaje por Messenger: "Hola, ¿cuáles son sus propuestas sobre transporte público?"
+   e) Volver al CRM en el primer navegador
+   f) Click botón "Sincronizar" nuevamente
+   g) Verificar que el nuevo mensaje aparece en la lista de conversaciones
+   → Esto demuestra que pages_messaging lee mensajes en tiempo real
+
+5. PROBAR INSTAGRAM_MANAGE_MESSAGES (si tienen cuenta Instagram):
+   a) Abrir Instagram en móvil o web
+   b) Buscar usuario @candidato_demo_crm
+   c) Enviar mensaje por Instagram Direct: "Me gustaría conocer sus planes de empleo juvenil"
+   d) Volver al CRM
+   e) Click "Sincronizar"
+   f) Verificar que mensaje de Instagram aparece con ícono 📷
+   g) Click en conversación de Instagram
+   h) Verificar que el análisis de IA también funciona para Instagram
+
+6. VERIFICAR SISTEMA MULTI-TENANT:
+   a) Las conversaciones de "Candidato Demo CRM" están aisladas
+   b) Solo el usuario que conectó esa página puede verlas
+   c) Si hubiera otro candidato conectado, sus datos estarían separados
+
+═══════════════════════════════════════════════════════════════
+PERMISOS A VERIFICAR
+═══════════════════════════════════════════════════════════════
+
+Durante el OAuth (paso 1), Meta debe mostrar estos 8 permisos:
+
+✓ business_management - Para gestionar páginas en sistema multi-tenant
+✓ pages_show_list - Para mostrar lista de páginas y permitir selección
+✓ pages_messaging - Para leer mensajes de Facebook Messenger
+✓ pages_read_engagement - Para leer metadatos de interacciones
+✓ instagram_basic - Para obtener info de Instagram Business vinculado
+✓ instagram_manage_messages - Para leer mensajes de Instagram Direct
+✓ whatsapp_business_management - Para conectar cuentas de WhatsApp Business
+✓ whatsapp_business_messaging - Para sincronizar mensajes de WhatsApp
+
+Cada permiso tiene una justificación específica documentada en este formulario.
+
+═══════════════════════════════════════════════════════════════
+NOTAS IMPORTANTES PARA LOS REVISORES
+═══════════════════════════════════════════════════════════════
+
+• CUENTA REAL: La cuenta de evaluador es una cuenta REAL de Facebook (no un usuario de prueba creado en "Roles de la app"). Esto permite probar pages_messaging correctamente, ya que los usuarios de prueba no pueden recibir mensajes de bots.
+
+• MENSAJES REALES: La página "Candidato Demo CRM" tiene 5 conversaciones activas con mensajes enviados por cuentas reales de Facebook, simulando ciudadanos que consultan sobre temas políticos.
+
+• ANÁLISIS DE IA: El sistema usa Google Gemini Flash API para analizar sentimientos e intereses. NO enviamos datos personales identificables a Google (solo texto de mensajes).
+
+• MULTI-TENANT: Cada candidato solo ve sus propias páginas y conversaciones. Los datos están completamente aislados entre diferentes usuarios.
+
+• NO HAY SPAM: La app NO envía mensajes automáticamente. Solo lee y analiza mensajes que los ciudadanos envían voluntariamente.
+
+• WEBHOOKS: Para prueba asíncrona, pueden configurar webhooks (instrucciones en documentación), pero no es necesario para verificar funcionalidad básica.
+
+═══════════════════════════════════════════════════════════════
+TIEMPO ESTIMADO DE PRUEBA
+═══════════════════════════════════════════════════════════════
+
+• Flujo completo (pasos 1-3): 5-7 minutos
+• Prueba en tiempo real (paso 4): +3 minutos
+• Prueba Instagram (paso 5): +3 minutos si tienen cuenta Instagram
+
+═══════════════════════════════════════════════════════════════
+SOPORTE Y CONTACTO
+═══════════════════════════════════════════════════════════════
+
+Si encuentran problemas durante la revisión o tienen preguntas:
+
+Email: [TU_EMAIL_REAL]
+Respuesta: Dentro de 24 horas hábiles
+
+Problemas conocidos:
+• Si la página no tiene Instagram conectado, aparece "Instagram: No configurado" (comportamiento esperado)
+• Primera sincronización puede tardar 10-15 segundos si hay muchas conversaciones
+• Configuración de WhatsApp requiere WhatsApp Business API (complejo, no requerido para verificar Facebook/Instagram)
+
+═══════════════════════════════════════════════════════════════
+DOCUMENTACIÓN ADICIONAL
+═══════════════════════════════════════════════════════════════
+
+Política de privacidad: [TU_DOMINIO]/privacy-policy.html
+API Docs: [TU_DOMINIO]/docs (Swagger UI)
+GitHub: [URL_GITHUB_SI_ES_PUBLICO]
+
+═══════════════════════════════════════════════════════════════
+
+═══════════════════════════════════════════════════════════════
+NOTAS FINALES
+═══════════════════════════════════════════════════════════════
+
+ANTES DE ENVIAR, REEMPLAZA:
+
+[TU_DOMINIO] → tu dominio real (ej: crm-politico.com)
+[TU_EMAIL_REAL] → tu email de soporte (ej: soporte@crm-politico.com)
+[DIGITALOCEAN/HEROKU/AWS] → el proveedor que uses realmente
+
+TIPS PARA FORMULARIO:
+
+• Sé específico y técnico (Meta aprecia detalles)
+• Menciona cumplimiento GDPR/CCPA cuando sea relevante
+• Explica claramente QUÉ haces con cada permiso y POR QUÉ lo necesitas
+• Relaciona cada respuesta con screenshots y timestamps del video
+• Si Meta pide aclaraciones, responde rápido (dentro de 48h)
+
+META PREFIERE:
+
+✓ Use cases políticos/electorales (legítimos y comunes)
+✓ Análisis de IA para mejorar servicio (no spam)
+✓ Sistema multi-tenant bien explicado (demuestra profesionalismo)
+✓ Privacidad por diseño (aislamiento de datos)
+✓ Cumplimiento de Data Deletion Requests
+
+META RECHAZA:
+
+✗ Apps que envían spam automático
+✗ Almacenamiento innecesario de datos sensibles
+✗ Compartir datos sin consentimiento
+✗ Use cases vagos o poco claros
+✗ Violación de Platform Policies de Meta
+
+═══════════════════════════════════════════════════════════════
+
+¡MUCHA SUERTE CON TU APP REVIEW! 🚀
+
+Si tienes dudas sobre alguna respuesta, consulta:
+• GUIA_APP_REVIEW_META.md (guía completa)
+• Meta Docs: https://developers.facebook.com/docs/app-review
+
