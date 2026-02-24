@@ -284,8 +284,22 @@ Devuelve un JSON con esta estructura:
         }
 
 
-# Instancia global del agente
-agente = AgenteExtraccionDatos()
+# Instancia global del agente (lazy initialization)
+_agente_instance = None
+
+def get_agente():
+    """Obtener instancia del agente (lazy initialization)."""
+    global _agente_instance
+    if _agente_instance is None:
+        try:
+            _agente_instance = AgenteExtraccionDatos()
+        except Exception as e:
+            print(f"[ADVERTENCIA] No se pudo inicializar el agente: {e}")
+            _agente_instance = None
+    return _agente_instance
+
+# Para compatibilidad con código existente
+agente = None
 
 
 def procesar_conversacion(
@@ -308,4 +322,12 @@ def procesar_conversacion(
     Returns:
         Datos extraídos
     """
-    return agente.procesar_mensaje(mensaje, plataforma, persona_id, historial, nombre_usuario)
+    agente_instance = get_agente()
+    if agente_instance is None:
+        return {
+            "datos_extraidos": {},
+            "necesita_mas_info": False,
+            "error": "Agente no disponible - credenciales de Google no configuradas",
+            "fecha_procesamiento": datetime.utcnow().isoformat()
+        }
+    return agente_instance.procesar_mensaje(mensaje, plataforma, persona_id, historial, nombre_usuario)
