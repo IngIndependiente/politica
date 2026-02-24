@@ -89,8 +89,8 @@ else:
     # En local: localhost
     BACKEND_HOST = os.getenv("BACKEND_HOST", "127.0.0.1")
     FRONTEND_HOST = os.getenv("FRONTEND_HOST", "127.0.0.1")
-BACKEND_PORT = int(os.getenv("BACKEND_PORT", 8000))
-FRONTEND_PORT = int(os.getenv("FRONTEND_PORT", 8050))
+BACKEND_PORT = int(os.getenv("PORT", os.getenv("BACKEND_PORT", 8000)))
+FRONTEND_PORT = int(os.getenv("PORT", os.getenv("FRONTEND_PORT", 8050)))
 
 # URL del backend para el frontend (puede ser diferente en producción)
 # En Railway: usar variable de entorno BACKEND_URL (ej: https://crm-politics-backend.railway.app)

@@ -1,22 +1,16 @@
-FROM python:3.9-slim
+FROM python:3.13-slim
 
 WORKDIR /app
 
-# Copiar requirements
+# Copiar requirements y instalar dependencias
 COPY requirements.txt .
-
-# Instalar dependencias con timeout más largo
 RUN pip install --no-cache-dir --default-timeout=1000 -r requirements.txt
 
 # Copiar código
 COPY . .
 
-# Copiar script de startup
-COPY start_frontend.sh .
+# Script de startup
 RUN chmod +x start_frontend.sh
 
-# Exponer puerto 8050
-EXPOSE 8050
-
 # Ejecutar frontend
-CMD ["./start_frontend.sh"]
+CMD ["bash", "start_frontend.sh"]
