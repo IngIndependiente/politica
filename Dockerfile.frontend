@@ -11,8 +11,12 @@ RUN pip install --no-cache-dir --default-timeout=1000 -r requirements.txt
 # Copiar código
 COPY . .
 
+# Copiar script de startup
+COPY start_frontend.sh .
+RUN chmod +x start_frontend.sh
+
 # Exponer puerto 8050
 EXPOSE 8050
 
 # Ejecutar frontend
-CMD ["python", "-m", "frontend.app"]
+CMD ["./start_frontend.sh"]
