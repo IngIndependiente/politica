@@ -1,5 +1,5 @@
 """Agente LangGraph para análisis de conversaciones políticas."""
-from typing import TypedDict, Annotated, List, Dict, Any
+from typing import TypedDict, Annotated, List, Dict, Any, Optional
 from langgraph.graph import StateGraph, END
 from langchain_core.messages import HumanMessage, SystemMessage
 import json
@@ -12,12 +12,12 @@ class AgentState(TypedDict):
     """Estado del agente."""
     mensaje: str
     plataforma: str
-    persona_id: int | None
-    nombre_usuario: str | None # Nuevo campo
+    persona_id: Optional[int]
+    nombre_usuario: Optional[str]
     datos_extraidos: Dict[str, Any]
     historial_conversacion: List[str]
     necesita_mas_info: bool
-    error: str | None
+    error: Optional[str]
 
 # ... (inside AgenteExtraccionDatos)
 

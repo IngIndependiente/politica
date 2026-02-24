@@ -15,7 +15,7 @@ import os
 import sys
 
 from backend import config
-from backend.database.storage import get_db, init_db, PersonaService, ConversacionService, AnalisisService, EventoService, USE_DATAFRAMES
+from backend.database.storage import get_db, init_db, PersonaService, ConversacionService, AnalisisService, EventoService, USE_DATAFRAMES, get_db_session
 from backend.database.candidato_services import CandidatoService
 
 # Importar agente con manejo de errores
