@@ -17,7 +17,16 @@ import sys
 from backend import config
 from backend.database.storage import get_db, init_db, PersonaService, ConversacionService, AnalisisService, EventoService, USE_DATAFRAMES
 from backend.database.candidato_services import CandidatoService
-from backend.agent.langgraph_agent import procesar_conversacion
+
+# Importar agente con manejo de errores
+try:
+    from backend.agent.langgraph_agent import procesar_conversacion
+    AGENTE_DISPONIBLE = True
+except Exception as e:
+    print(f"[ADVERTENCIA] No se pudo inicializar el agente: {e}")
+    AGENTE_DISPONIBLE = False
+    procesar_conversacion = None
+
 from backend.integrations.meta_api import meta_client, crear_cliente_candidato
 from backend.integrations.whatsapp_api import whatsapp_client
 import requests

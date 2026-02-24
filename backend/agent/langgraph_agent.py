@@ -35,9 +35,13 @@ class AgenteExtraccionDatos:
     def __init__(self):
         """Inicializar el agente con el modelo de lenguaje."""
         self.llm = self._create_llm()
+        self.available = self.llm is not None
         
-        # Construir el grafo
-        self.graph = self._build_graph()
+        # Construir el grafo solo si hay LLM disponible
+        if self.available:
+            self.graph = self._build_graph()
+        else:
+            self.graph = None
     
     def _create_llm(self):
         """Crear el modelo de lenguaje según la configuración disponible."""
@@ -82,15 +86,12 @@ class AgenteExtraccionDatos:
             )
         
         else:
-            raise ValueError(
-                "[ERROR] No se encontraron credenciales de Google.\n"
-                "Para usar Vertex AI con Google CLI:\n"
-                "  1. Ejecuta: gcloud auth application-default login\n"
-                "  2. Configura GCP_PROJECT_ID en tu archivo .env\n"
-                "\nPara usar Google AI Studio (gratis):\n"
-                "  1. Obten una API key en: https://aistudio.google.com/app/apikey\n"
-                "  2. Configura GOOGLE_API_KEY en tu archivo .env"
-            )
+            print("[ADVERTENCIA] No se encontraron credenciales de Google.")
+            print("El agente funcionará en modo degradado sin capacidades de IA.")
+            print("Para habilitar el agente:")
+            print("  - Opción 1: Configura GOOGLE_API_KEY en tu archivo .env")
+            print("  - Opción 2: Configura GCP_PROJECT_ID para usar Vertex AI")
+            return None
     
     def _build_graph(self) -> StateGraph:
         """Construir el grafo de estado del agente."""
