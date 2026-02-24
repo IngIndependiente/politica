@@ -1168,7 +1168,51 @@ def obtener_persona(persona_id: int):
 
 from collections import Counter
 
-# ...
+
+@app.get("/api/personas")
+def listar_personas(limit: int = 100):
+    """Listar todas las personas."""
+    with get_db() as db:
+        if USE_DATAFRAMES:
+            from backend.database.dataframe_storage import get_storage
+            storage = get_storage()
+            personas_list = storage.personas_df.head(limit).to_dict('records')
+            
+            resultado = []
+            for persona in personas_list:
+                persona_id = persona['id']
+                rel_mask = storage.persona_interes_df['persona_id'] == persona_id
+                interes_ids = storage.persona_interes_df[rel_mask]['interes_id'].values
+                intereses_mask = storage.intereses_df['id'].isin(interes_ids)
+                intereses = storage.intereses_df[intereses_mask]['categoria'].tolist()
+                
+                resultado.append({
+                    "id": persona['id'],
+                    "nombre_completo": persona.get('nombre_completo'),
+                    "edad": persona.get('edad'),
+                    "genero": persona.get('genero'),
+                    "ubicacion": persona.get('ubicacion'),
+                    "intereses": intereses,
+                    "fecha_primer_contacto": persona['fecha_primer_contacto'],
+                    "fecha_ultimo_contacto": persona['fecha_ultimo_contacto']
+                })
+            return resultado
+        else:
+            personas = db.query(Persona).limit(limit).all() if db else []
+            return [
+                {
+                    "id": p.id,
+                    "nombre_completo": p.nombre_completo,
+                    "edad": p.edad,
+                    "genero": p.genero,
+                    "ubicacion": p.ubicacion,
+                    "intereses": [i.categoria for i in p.intereses],
+                    "fecha_primer_contacto": p.fecha_primer_contacto,
+                    "fecha_ultimo_contacto": p.fecha_ultimo_contacto
+                }
+                for p in personas
+            ]
+
 
 @app.post("/api/personas/buscar")
 def buscar_personas(busqueda: BusquedaRequest):
