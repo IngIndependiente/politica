@@ -174,7 +174,7 @@ def root():
     """Endpoint raíz."""
     return {
         "message": "Agente Político API",
-        "version": "1.0.0",
+        "version": "1.0.1",
         "endpoints": {
             "personas": "/api/personas",
             "buscar": "/api/personas/buscar",
