@@ -2638,16 +2638,10 @@ def procesar_mensaje_whatsapp(phone: str, texto: str, username: str, message_id:
         traceback.print_exc()
 
 
-# === Montar Dash Dashboard en FastAPI ===
-try:
-    from frontend.app import app as dash_app
-    from fastapi.middleware.wsgi import WSGIMiddleware
-    
-    # Montar la aplicación Dash como WSGI en la ruta /dashboard
-    app.mount("/dashboard", WSGIMiddleware(dash_app.server))
-    print("✅ Dashboard Dash montado en /dashboard")
-except Exception as e:
-    print(f"[ADVERTENCIA] No se pudo montar el dashboard Dash: {e}")
+# === Dashboard Dash ===
+# El dashboard Dash se ejecuta en un puerto separado (8050)
+# Accesible en: http://localhost:8050 (local) o configurar en Railway como servicio separado
+print("ℹ️  Dashboard Dash disponible en puerto 8050 (ejecutar: python -m frontend.app)")
 
 
 if __name__ == "__main__":
