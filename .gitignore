@@ -1,0 +1,32 @@
+# Base de datos local
+*.db
+*.db-journal
+*.db.backup.*
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Entorno
+.env
+.venv/
+venv/
+env/
+
+# Data local
+data/
+exports/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+*.log
